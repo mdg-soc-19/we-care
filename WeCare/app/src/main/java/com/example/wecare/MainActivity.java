@@ -17,12 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
 
-
+        // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frameContainer, new Login_Fragment(),
-                            Utils.Login_Fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.frameContainer, new Login_Fragment(),Utils.Login_Fragment).commit();
         }
 
         // On close icon click finish activity
@@ -38,24 +35,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Replace Login Fragment with animation
     protected void replaceLoginFragment() {
-        fragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                .replace(R.id.frameContainer, new Login_Fragment(),
-                        Utils.Login_Fragment).commit();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.left_enter, R.anim.right_out).replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment).commit();
     }
 
     @Override
     public void onBackPressed() {
 
+        // Find the tag of signup and forgot password fragment
 
-        Fragment SignUp_Fragment = fragmentManager
-                .findFragmentByTag(Utils.SignUp_Fragment);
-        Fragment ForgotPassword_Fragment = fragmentManager
-                .findFragmentByTag(Utils.ForgotPassword_Fragment);
+        Fragment SignUp_Fragment = fragmentManager.findFragmentByTag(Utils.SignUp_Fragment);
+        Fragment ForgotPassword_Fragment = fragmentManager.findFragmentByTag(Utils.ForgotPassword_Fragment);
 
-
+        // Check if both are null or not
+        // If both are not null then replace login fragment else do backpressed
+        // task
 
         if (SignUp_Fragment != null)
             replaceLoginFragment();
