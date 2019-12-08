@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#9874a7"
+    android:gravity="center_horizontal">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="MENU"
+    android:textSize="40dp"
+    android:textColor="#e9d8da"
+    android:layout_marginTop="40dp"
+
+
+    />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:text="Medical Aid"
+        android:background="#ebd8ee"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:background="#ebd8ee"
+        android:text="Plannning Aid"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Helping Hand"
+        android:background="#ebd8ee"
+        android:textColor="@color/black"/>
+
+</LinearLayout>
+
+<Button
+android:id="@+id/button4"
+android:layout_width="wrap_content"
+android:layout_height="60dp"
+android:layout_marginTop="600dp"
+    android:layout_marginLeft="300dp"
+android:text="LogOut"
+android:background="#9874a7"
+    android:textSize="20dp"
+android:textColor="#e9d8da"/>
+
+</RelativeLayout>
