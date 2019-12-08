@@ -5,7 +5,12 @@ import java.util.regex.Pattern;
 
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,13 +21,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+
 public class SignUp_Fragment extends Fragment implements OnClickListener {
+
     private static View view;
-    private static EditText fullName, emailId, mobileNumber, location,
-            password, confirmPassword;
+    private static EditText fullName, Email, mobileNumber, location,
+            Password, confirmPassword;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
+
+    private FirebaseAuth firebaseAuth;
 
     public SignUp_Fragment() {
 
@@ -31,6 +44,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        firebaseAuth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.sign_up_layout, container, false);
         initViews();
         setListeners();
@@ -40,10 +54,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     // Initialize all views
     private void initViews() {
         fullName = (EditText) view.findViewById(R.id.fullName);
-        emailId = (EditText) view.findViewById(R.id.userEmailId);
+        Email = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
         location = (EditText) view.findViewById(R.id.location);
-        password = (EditText) view.findViewById(R.id.password);
+        Password = (EditText) view.findViewById(R.id.password);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
@@ -65,6 +79,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
                 // Call checkValidation method
                 checkValidation();
+
                 break;
 
             case R.id.already_user:
@@ -76,15 +91,17 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     }
 
-    // Check Validation Method
-    private void checkValidation() {
+
+        // Check Validation Method
+
+    private void checkValidation(){
 
         // Get all edittext texts
         String getFullName = fullName.getText().toString();
-        String getEmailId = emailId.getText().toString();
+        String getEmailId = Email.getText().toString();
         String getMobileNumber = mobileNumber.getText().toString();
         String getLocation = location.getText().toString();
-        String getPassword = password.getText().toString();
+        String getPassword = Password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
         // Pattern match for email id
@@ -120,8 +137,36 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
             // Else do signup
         else
-            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
-                    .show();
+            //getting email and password from edit texts
+            registerUser();
+
+
+    }
+
+
+    private void registerUser() {
+        String email = Email.getText().toString().trim();
+        String password = Password.getText().toString().trim();
+
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(getActivity(),new OnCompleteListener<AuthResult>(){
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                //checking if success
+                if (task.isSuccessful()) {
+                    //display some message here
+                    Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_LONG).show();
+                } else {
+                    //display some message here
+                    Toast.makeText(getActivity(), "Registration Error", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
 
     }
 }
+
+
+
