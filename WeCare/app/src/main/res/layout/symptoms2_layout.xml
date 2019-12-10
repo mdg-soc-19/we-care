@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#38b7af">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#38b7af">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="ADD"
+                android:textColor="@color/black"
+                android:typeface="serif"
+                android:background="#a2ecd9"    />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="REMOVE"
+                android:typeface="serif"
+                android:textColor="@color/black"
+                android:background="#a2ecd9" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="UPDATE"
+                android:textColor="@color/black"
+                android:typeface="serif"
+                android:background="#a2ecd9"    />
+
+        </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Symptom"
+        android:layout_marginTop="80dp"
+        android:textColor="#226f6b"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:typeface="sans"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_marginTop="80dp"
+        android:textColor="#226f6b"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:typeface="sans"/>
+
+
+</LinearLayout>
+</LinearLayout>

@@ -126,10 +126,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             case R.id.loginBtn:
 
                 checkValidation();
-
-
-
-
                 break;
 
             case R.id.forgot_password:
