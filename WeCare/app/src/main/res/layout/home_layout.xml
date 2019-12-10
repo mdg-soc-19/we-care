@@ -15,6 +15,7 @@
     android:layout_height="wrap_content"
     android:text="MENU"
     android:textSize="40dp"
+    android:typeface="serif"
     android:textColor="#e9d8da"
     android:layout_marginTop="40dp"
 
@@ -22,7 +23,7 @@
     />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/medaid"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
@@ -31,16 +32,16 @@
         android:textColor="@color/black"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/planaid"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:background="#ebd8ee"
-        android:text="Plannning Aid"
+        android:text="Planning Aid"
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/helphand"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -59,6 +60,7 @@ android:layout_marginTop="600dp"
 android:text="LogOut"
 android:background="#9874a7"
     android:textSize="20dp"
+    android:typeface="serif"
 android:textColor="#e9d8da"/>
 
 </RelativeLayout>
