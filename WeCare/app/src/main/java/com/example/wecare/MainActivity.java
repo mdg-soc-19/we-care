@@ -5,6 +5,22 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
+import androidx.appcompat.app.ActionBar;
+import android.app.ActivityManager;
+import androidx.appcompat.app.ActionBar;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.os.Bundle;
+import androidx.annotation.RequiresApi;
+import android.view.View;
+import android.widget.TextView;
+
 import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,12 +31,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragmentManager = getSupportFragmentManager();
+       fragmentManager = getSupportFragmentManager();
 
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
+
             fragmentManager.beginTransaction().replace(R.id.frameContainer, new Login_Fragment(),Utils.Login_Fragment).commit();
         }
+
+
 
         // On close icon click finish activity
         findViewById(R.id.close_activity).setOnClickListener(
@@ -32,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
+
 
     }
 

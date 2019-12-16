@@ -64,8 +64,8 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new TakeMedsAlarm_Fragment(),
-                                Utils.TakeMedsAlarm_Fragment).commit();
+                                new TakeMedsAlarm1_Fragment(),
+                                Utils.TakeMedsAlarm1_Fragment).commit();
                 break;
 
             case R.id.restockmed:
@@ -73,8 +73,8 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                             .beginTransaction()
                             .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                             .replace(R.id.frameContainer,
-                                    new RestockMeds_Fragment(),
-                                    Utils.RestockMeds_Fragment).commit();
+                                    new RestockMeds1_Fragment(),
+                                    Utils.RestockMeds1_Fragment).commit();
                     break;
 
             case R.id.docvisit:
@@ -82,8 +82,8 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new DocVisits_Fragment(),
-                                Utils.DocVisits_Fragment).commit();
+                                new DocVisits1_Fragment(),
+                                Utils.DocVisits1_Fragment).commit();
                 break;
 
             case R.id.symptom:
@@ -91,8 +91,8 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new Symptoms_Fragment(),
-                                Utils.Symptoms_Fragment).commit();
+                                new Symptoms1_Fragment(),
+                                Utils.Symptoms1_Fragment).commit();
                 break;
 
 
