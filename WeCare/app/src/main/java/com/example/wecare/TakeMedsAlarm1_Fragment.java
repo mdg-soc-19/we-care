@@ -7,17 +7,40 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
+import android.widget.DatePicker;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickListener {
+
+
+
+
     private static View view;
    // private static LinearLayout medicalaid_layout;
     private static Animation shakeAnimation;
-    private static Button AddBtn;
+    private Button Addbtn,RemoveBtn;
+    private EditText AddAlarm;
+
     private static FragmentManager fragmentManager;
+
 
     public TakeMedsAlarm1_Fragment() {
 
@@ -37,16 +60,19 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
-        AddBtn=(Button)view.findViewById(R.id.add);
+        RemoveBtn=(Button)view.findViewById(R.id.remove);
+        Addbtn=(Button)view.findViewById(R.id.add);
+
 
 
     }
 
     private void setListeners() {
 
-        AddBtn.setOnClickListener(this);
-
-    }
+        Addbtn.setOnClickListener(this);
+        RemoveBtn.setOnClickListener(this);
+       // AddAlarm.setOnClickListener(new View.OnClickListener() {
+        }
 
 
     @Override
@@ -60,6 +86,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                 new TakeMedsAlarm_Fragment(),
                                 Utils.TakeMedsAlarm_Fragment).commit();
                 break;
+
+
 
 
 

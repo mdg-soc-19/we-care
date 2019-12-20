@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#38b7af">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#38b7af">
-
-        <Button
-            android:layout_width="10dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="350dp"
-            android:background="#a2ecd9"
-            />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +11,8 @@
         android:orientation="vertical"
         android:background="#38b7af">
 
-
-
-
-
-    <EditText
+        <EditText
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -35,6 +21,7 @@
             android:textSize="25dp" />
 
          <EditText
+             android:id="@+id/dose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -46,83 +33,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remind every:"
-        android:textColor="@color/black"
+        android:textColor="@color/white_greyish"
         android:typeface="serif"
         android:textSize="50dp"/>
 
-        <TimePicker
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TimePicker>
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:text="Select Time"
+            android:textSize="25dp"
+            android:background="@color/white_greyish"
+            android:textColor="@color/black"
+            android:typeface="serif"
+            android:id="@+id/t"
+            android:layout_gravity="center_horizontal" />
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-    <CheckBox
+
+    <Button
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Sunday"
-        android:textSize="25dp"/>
+        android:layout_marginTop="30dp"
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Monday"
-        android:textSize="25dp"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Tuesday"
-        android:textSize="25dp"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Wednesday"
-        android:textSize="25dp"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Thursday"
-        android:textSize="25dp"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Friday"
-        android:textSize="25dp"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:text="Saturday"
-        android:textSize="25dp"/>
-            </LinearLayout>
-        </ScrollView>
-
+        android:text="Save"
+        android:background="@color/white_greyish"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
     </LinearLayout>
-    </RelativeLayout>
 
-</HorizontalScrollView>
+</ScrollView>
