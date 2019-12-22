@@ -31,7 +31,7 @@ import java.util.Calendar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class TakeMedsAlarm_Fragment extends Fragment  {
+public class TakeMedsAlarm_Fragment extends Fragment implements TimePickerDialog.OnTimeSetListener{
 
     private static View view;
     private static Button Save;
@@ -40,7 +40,7 @@ public class TakeMedsAlarm_Fragment extends Fragment  {
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
 
-    private DatabaseReference RootRef;
+    private DatabaseReference RootRef,DemoRef1,DemoRef2;
 
     public TakeMedsAlarm_Fragment(){
 
@@ -53,7 +53,6 @@ public class TakeMedsAlarm_Fragment extends Fragment  {
         view = inflater.inflate(R.layout.takemedsalarm_layout, container, false);
         initViews();
         setListeners();
-
         return view;
     }
 
@@ -65,7 +64,8 @@ public class TakeMedsAlarm_Fragment extends Fragment  {
                 R.anim.shake);
 
         RootRef = FirebaseDatabase.getInstance().getReference();
-
+        DemoRef1=RootRef.child("MedName");
+        DemoRef2=RootRef.child("MedDose");
         Name=(EditText)view.findViewById(R.id.name);
         Dose=(EditText)view.findViewById(R.id.dose);
         T=(Button) view.findViewById(R.id.t);
@@ -79,9 +79,12 @@ public class TakeMedsAlarm_Fragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 DialogFragment timePicker = new TimePickerFragment();
-                Calendar c = Calendar.getInstance();
-                timePicker.show(getActivity().getSupportFragmentManager(), "time picker");
-                startAlarm(c);
+
+                timePicker.show(getFragmentManager(), "time picker");
+
+               /** new CustomToast().Show_Toast(getActivity(), view,
+                        "Zu.");*/
+
             }
 
 
@@ -95,12 +98,24 @@ public class TakeMedsAlarm_Fragment extends Fragment  {
             public void onClick(View v) {
 
                 String MedName = Name.getText().toString();
-                RootRef.push().setValue(MedName);
+                DemoRef1.push().setValue(MedName);
                 String MedDose = Dose.getText().toString();
-                RootRef.push().setValue(MedDose);
+                DemoRef2.push().setValue(MedDose);
             }
         });
     }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
+
+      /**  new CustomToast().Show_Toast(getActivity(), view,
+                "Zu!");*/
+    }
+
 
     private void startAlarm(Calendar c) {
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
