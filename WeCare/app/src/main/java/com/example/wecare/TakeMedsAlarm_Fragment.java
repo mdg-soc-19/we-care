@@ -18,23 +18,27 @@ import android.widget.Button;
 
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
+import com.example.wecare.R;
+
+
+
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class TakeMedsAlarm_Fragment extends Fragment implements TimePickerDialog.OnTimeSetListener{
+public class TakeMedsAlarm_Fragment extends Fragment{
 
     private static View view;
-    private static Button Save;
+    private static Button Save,Alarm;
     private static EditText Name,Dose;
     private static Button T;
     private static Animation shakeAnimation;
@@ -43,7 +47,6 @@ public class TakeMedsAlarm_Fragment extends Fragment implements TimePickerDialog
     private DatabaseReference RootRef,DemoRef1,DemoRef2;
 
     public TakeMedsAlarm_Fragment(){
-
     }
 
 
@@ -68,6 +71,7 @@ public class TakeMedsAlarm_Fragment extends Fragment implements TimePickerDialog
         DemoRef2=RootRef.child("MedDose");
         Name=(EditText)view.findViewById(R.id.name);
         Dose=(EditText)view.findViewById(R.id.dose);
+
         T=(Button) view.findViewById(R.id.t);
         Save= (Button) view.findViewById(R.id.save);
     }
@@ -105,29 +109,14 @@ public class TakeMedsAlarm_Fragment extends Fragment implements TimePickerDialog
         });
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
-
-      /**  new CustomToast().Show_Toast(getActivity(), view,
-                "Zu!");*/
-    }
 
 
-    private void startAlarm(Calendar c) {
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, 0);
 
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
-        }
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-    }
+
+
+
+
 
 
 

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#38b7af">
+    android:background="#38b7af"
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -49,6 +50,14 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alarmView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>
