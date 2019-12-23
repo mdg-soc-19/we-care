@@ -6,9 +6,19 @@
     android:background="#38b7af">
 
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:layout_marginTop="20dp"
+        android:background="#38b7af"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
 
-
-        <EditText
+    <EditText
+            android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -17,6 +27,7 @@
         android:textSize="25dp" />
 
     <EditText
+        android:id="@+id/dose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -34,12 +45,30 @@
         android:textSize="30dp"/>
 
     <DatePicker
+        android:id="@+id/D"
+        android:text="Enter Date"
+        android:textSize="20dp"
+        android:typeface="serif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="#38b7af"
         android:layout_marginTop="20dp">
 
     </DatePicker>
+
+    <Button
+        android:id="@+id/save1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:text="Save"
+        android:layout_marginTop="20dp"
+        android:background="@color/white_greyish"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
 
 
 

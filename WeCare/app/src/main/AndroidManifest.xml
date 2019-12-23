@@ -21,7 +21,15 @@
             </intent-filter>
 
         </activity>
-        <receiver android:name=".AlertReceiver" />
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+        <service
+            android:name=".MyNewIntentService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

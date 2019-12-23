@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity {
-
+   // private Stack<BackPressListener> backPressListeners = new Stack<BackPressListener>();
     private static FragmentManager fragmentManager;
 
     @Override
@@ -65,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
                         Utils.Login_Fragment).commit();
     }
 
+    protected void replaceMedicalAid_Fragment() {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainer, new Home_Fragment(),
+                        Utils.Home_Fragment).commit();
+    }
+
+
     @Override
     public void onBackPressed() {
 
@@ -72,6 +81,33 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment SignUp_Fragment = fragmentManager.findFragmentByTag(Utils.SignUp_Fragment);
         Fragment ForgotPassword_Fragment = fragmentManager.findFragmentByTag(Utils.ForgotPassword_Fragment);
+        Fragment RestockMeds1_Fragment = fragmentManager.findFragmentByTag(Utils.RestockMeds1_Fragment);
+        Fragment RestockMeds_Fragment = fragmentManager.findFragmentByTag(Utils.RestockMeds_Fragment);
+        Fragment TakeMedsAlarm_Fragment = fragmentManager.findFragmentByTag(Utils.TakeMedsAlarm_Fragment);
+        Fragment TakeMedsAlarm1_Fragment = fragmentManager.findFragmentByTag(Utils.TakeMedsAlarm1_Fragment);
+        Fragment Symptoms_Fragment = fragmentManager.findFragmentByTag(Utils.Symptoms_Fragment);
+        Fragment Symptoms1_Fragment = fragmentManager.findFragmentByTag(Utils.Symptoms1_Fragment);
+
+        if (RestockMeds1_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else if (RestockMeds_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else
+            super.onBackPressed();
+
+        if (TakeMedsAlarm_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else if (TakeMedsAlarm1_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else
+            super.onBackPressed();
+
+        if (Symptoms1_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else if (Symptoms_Fragment != null)
+            replaceMedicalAid_Fragment();
+        else
+            super.onBackPressed();
 
         // Check if both are null or not
         // If both are not null then replace login fragment else do backpressed

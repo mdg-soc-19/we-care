@@ -8,7 +8,10 @@ import android.content.ContextWrapper;
 import android.os.Build;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +25,11 @@ public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
     private DatabaseReference RootRef,DemoRef1,DemoRef2;
-    private  String MedName,MedDose;
+    public String MedName1,MedName,MedDose;
+    public Med Med;
+
+
+
 
     private NotificationManager mManager;
 
@@ -48,45 +55,54 @@ public class NotificationHelper extends ContextWrapper {
         return mManager;
     }
 
+
+
+
+
+
+
+
+
     public NotificationCompat.Builder getChannelNotification() {
 
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef1=RootRef.child("MedName");
         DemoRef2=RootRef.child("MedDose");
-        MedName= "zu";
+       // MedName= "zu";
 
-         class Med {
 
-            public String Medname;
-            public String Meddose;
-
-            public Med(String MedName, String MedDose) {
-                // ...
-            }
-
-        }
-
+        DatabaseReference RootRef = FirebaseDatabase.getInstance().getReference().child("MedName");
         RootRef.addValueEventListener(new ValueEventListener() {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-             Med med =  dataSnapshot.getValue(Med.class);
-             MedName=med.Medname;
-             MedDose=med.Meddose;
+
+            public void onDataChange( DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot med : dataSnapshot.getChildren()){
+                    Med Med = med.getValue(Med.class);
+                    if(Med!=null)
+                        MedName1=Med.MedName;
+
+                }
+
+                   /** Med = dataSnapshot.getValue(Med.class);
+                    if(Med!=null)
+                    MedName=Med.MedName;
+                    if(Med!=null)
+                    MedDose = Med.MedDose;*/
 
             }
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e("UserListActivity", "Error occured");
+                public void onCancelled(  DatabaseError databaseError) {
                     // Do something about the error
-
-
-                }
+                    Toast.makeText(getApplicationContext(),"Unable to retrieve data",Toast.LENGTH_LONG).show();
+            }
                 });
 
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("TakeMedAlarm")
-                .setContentText(MedName)
+                .setContentText(MedName1)
                 .setSmallIcon(R.drawable.ic_android);
     }
 

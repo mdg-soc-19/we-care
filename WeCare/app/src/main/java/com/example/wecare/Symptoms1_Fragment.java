@@ -1,23 +1,27 @@
 package com.example.wecare;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class Symptoms1_Fragment extends Fragment implements View.OnClickListener {
+public class Symptoms1_Fragment extends Fragment{
     private static View view;
     // private static LinearLayout medicalaid_layout;
     private static Animation shakeAnimation;
+    private Button BackBtn;
 
-    private static Button AddBtn2;
+    public CalendarView C;
     private static FragmentManager fragmentManager;
 
     public Symptoms1_Fragment() {
@@ -27,9 +31,29 @@ public class Symptoms1_Fragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.medicalaid_layout, container, false);
+        view = inflater.inflate(R.layout.symptoms1_layout, container, false);
         initViews();
-        setListeners();
+        C.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView C, int year, int month, int dayOfMonth) {
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                        .replace(R.id.frameContainer,
+                                new Symptoms_Fragment(),
+                                Utils.Symptoms_Fragment).commit();
+
+            }
+        });
+
+        BackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MainActivity().replaceMedicalAid_Fragment();
+            }
+        });
+
+
         return view;
     }
 
@@ -38,36 +62,17 @@ public class Symptoms1_Fragment extends Fragment implements View.OnClickListener
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
-        AddBtn2=(Button)view.findViewById(R.id.add);
+        C=(CalendarView)view.findViewById(R.id.c);
+        BackBtn=(Button)view.findViewById(R.id.back);
 
 
     }
 
-    private void setListeners() {
-
-        AddBtn2.setOnClickListener(this);
 
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.add:
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer,
-                                new Symptoms_Fragment(),
-                                Utils.Symptoms_Fragment).commit();
-                break;
 
 
 
 
-
-        }
-
-    }
-
-}

@@ -53,7 +53,7 @@ public class TimePickerFragment extends DialogFragment {
 
     private void startAlarm(Calendar c) {
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
+        Intent intent = new Intent(getActivity(), MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, 0);
 
         if (c.before(Calendar.getInstance())) {

@@ -5,7 +5,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#38b7af">
+    android:background="#38b7af"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:layout_marginTop="20dp"
+        android:background="#38b7af"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -49,6 +62,14 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alarmView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>

@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#38b7af">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#38b7af">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:layout_marginTop="20dp"
+        android:background="#38b7af"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -19,48 +37,31 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:text="ADD"
-            android:textColor="@color/black"
-            android:typeface="serif"
-            android:background="#a2ecd9"    />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pick a day and add whatever symptoms or illness you've been
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:text="REMOVE"
-            android:typeface="serif"
-            android:textColor="@color/black"
-            android:background="#a2ecd9" />
+            having:"
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:text="UPDATE"
-            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
             android:typeface="serif"
-            android:background="#a2ecd9"    />
+            android:textSize="20dp"/>
+
+        <CalendarView
+            android:id="@+id/c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
-
-
 
 
 </LinearLayout>
+
+</ScrollView>
