@@ -47,14 +47,25 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private static View view;
    // private static LinearLayout medicalaid_layout;
     private static Animation shakeAnimation;
+<<<<<<< HEAD
     private Button Addbtn,RemoveBtn,BackBtn;
 
+=======
+    private Button Addbtn,RemoveBtn;
+    private EditText AddAlarm;
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
     private DatabaseReference RootRef,DemoRef1,DemoRef2;
     private static FragmentManager fragmentManager;
     private RecyclerView AlarmView;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
+<<<<<<< HEAD
     public Query query;
+=======
+
+
+
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
     public TakeMedsAlarm1_Fragment() {
 
@@ -84,9 +95,13 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         BackBtn=(Button)view.findViewById(R.id.back);
 
         AlarmView = (RecyclerView)view. findViewById(R.id.alarmView);
+<<<<<<< HEAD
         query = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("MedName");
+=======
+
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
 
     }
@@ -96,12 +111,26 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         public String  mTitle;
 
         public Model() {
+<<<<<<< HEAD
         }
 
         public Model(String mTitle) {
             this.mTitle = mTitle;
         }
 
+=======
+
+        }
+
+        public Model(String mTitle) {
+
+            this.mTitle = mTitle;
+
+        }
+
+
+
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
         public String getmTitle() {
             return mTitle;
         }
@@ -117,6 +146,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
         Addbtn.setOnClickListener(this);
         RemoveBtn.setOnClickListener(this);
+<<<<<<< HEAD
         BackBtn.setOnClickListener(this);
         }
 
@@ -129,6 +159,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
             super(itemView);
             root = itemView.findViewById(R.id.list_root);
             txtTitle = itemView.findViewById(R.id.alarm_title);
+=======
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
         }
 
         public void setTxtTitle(String string) {
@@ -201,7 +233,91 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         mFireAdapter.stopListening();
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public LinearLayout root;
+        public TextView txtTitle;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            root = itemView.findViewById(R.id.list_root);
+            txtTitle = itemView.findViewById(R.id.alarm_title);
+        }
+
+        public void setTxtTitle(String string) {
+            txtTitle.setText(string);
+        }
+
+    }
+
+    private void fetch() {
+        Query query = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("MedName");
+
+
+        FirebaseRecyclerOptions<Model> options =
+                new FirebaseRecyclerOptions.Builder<Model>()
+                        .setQuery(query, new SnapshotParser<Model>() {
+                            @NonNull
+                            @Override
+                            public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
+                                return new Model(
+                                        snapshot.child("MedName").getValue().toString());
+
+                            }
+                        })
+                        .build();
+
+        mFireAdapter = new FirebaseRecyclerAdapter<Model,ViewHolder>(options) {
+            @Override
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_item, parent, false);
+
+                return new ViewHolder(view);
+            }
+
+
+            @Override
+            protected void onBindViewHolder(ViewHolder holder, final int position, Model model) {
+                holder.setTxtTitle(model.getmTitle());
+
+
+                holder.root.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                                .replace(R.id.frameContainer,
+                                        new TakeMedsAlarm_Fragment(),
+                                        Utils.TakeMedsAlarm_Fragment).commit();
+
+                    }
+                });
+            }
+
+        };
+        AlarmView.setAdapter(mFireAdapter);
+    }
+
     @Override
+    public void onStart() {
+        super.onStart();
+        mFireAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFireAdapter.stopListening();
+    }
+
+
+
+
+     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
@@ -212,6 +328,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                 new TakeMedsAlarm_Fragment(),
                                 Utils.TakeMedsAlarm_Fragment).commit();
 
+<<<<<<< HEAD
                 onStart();
                 onStop();
                 break;
@@ -223,6 +340,9 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     }
 
 
+=======
+        }
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
 
 }

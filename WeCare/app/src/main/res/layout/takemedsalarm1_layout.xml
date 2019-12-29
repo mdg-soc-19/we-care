@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#38b7af"
     tools:context=".MainActivity">
+<<<<<<< HEAD
 
     <Button
         android:id="@+id/back"
@@ -19,6 +20,8 @@
         android:typeface="serif"
         android:layout_gravity="center_horizontal"/>
 
+=======
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
     <TextView
         android:layout_width="match_parent"

@@ -16,15 +16,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
-import android.annotation.TargetApi;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 
-
-import androidx.fragment.app.DialogFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

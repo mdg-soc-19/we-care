@@ -16,6 +16,10 @@
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
+<<<<<<< HEAD
+=======
+
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
         android:padding="16dp">
 
         <TextView
@@ -25,7 +29,12 @@
             android:text="Title"
             android:textColor="@android:color/black"
             android:textSize="16sp"
+<<<<<<< HEAD
             android:textStyle="bold"/>
+=======
+            android:textStyle="bold" />
+
+>>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
     </LinearLayout>
 
