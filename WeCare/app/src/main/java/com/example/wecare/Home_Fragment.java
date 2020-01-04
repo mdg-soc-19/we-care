@@ -75,6 +75,12 @@ public class Home_Fragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.planaid:
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                        .replace(R.id.frameContainer,
+                                new PlanningAid_Fragment(),
+                                Utils.PlanningAid_Fragment).commit();
 
                 break;
 

@@ -38,11 +38,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class TakeMedsAlarm_Fragment extends Fragment{
 
     private static View view;
-<<<<<<< HEAD
+
     private static Button Save,BackBtn;
-=======
-    private static Button Save,Alarm;
->>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
+
+
     private static EditText Name,Dose;
     private static Button T;
     private static Animation shakeAnimation;
@@ -114,7 +113,7 @@ public class TakeMedsAlarm_Fragment extends Fragment{
             }
         });
 
-<<<<<<< HEAD
+
         BackBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -123,20 +122,7 @@ public class TakeMedsAlarm_Fragment extends Fragment{
                     }
                 });
     }
-=======
->>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
-
-
-
-
-
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
 
 

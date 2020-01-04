@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#FF7F50"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" MEDICAL AID "
+        android:typeface="serif"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/util"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="UTILITIES REMINDER"
+        android:textSize="20dp"
+        android:background="#FF7F50"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#FFE4B5"
+        android:text="Keep track of Bill payments, get reminded about them"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:typeface="sans"
+        android:gravity="center_vertical"/>
+
+
+    <Button
+        android:id="@+id/cal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="SOCIAL CALENDAR"
+        android:textSize="20dp"
+        android:background="#FF7F50"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#FFE4B5"
+        android:text="Record events"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:typeface="sans"
+        android:gravity="center_vertical"/>
+
+
+
+
+</LinearLayout>

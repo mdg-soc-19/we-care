@@ -57,25 +57,7 @@
 
 
 
-    <Button
-        android:id="@+id/docvisit"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Doctor Appointments"
-        android:textSize="20dp"
-        android:background="#38b7af"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#a2ecd9"
-        android:text="Keep track of your Doctors and Medical Appointments, get reminded about them"
-        android:textColor="#226f6b"
-        android:textSize="25dp"
-        android:textAlignment="center"
-        android:typeface="sans"/>
 
 
     <Button

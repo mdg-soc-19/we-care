@@ -5,11 +5,7 @@
     android:layout_height="match_parent"
     android:background="#38b7af"
     android:id="@+id/takemedalarm">
-<<<<<<< HEAD
 
-
-=======
->>>>>>> e44b0a6a2f3fc8b6f351e8a05f0fa0ece6b22866
 
     <LinearLayout
         android:layout_width="match_parent"

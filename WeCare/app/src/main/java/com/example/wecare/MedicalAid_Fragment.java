@@ -41,7 +41,6 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                 R.anim.shake);
         TakeMedAlarmBtn = (Button) view.findViewById(R.id.takemed);
         RestockMedBtn = (Button) view.findViewById(R.id.restockmed);
-        DocBtn=(Button) view.findViewById(R.id.docvisit);
         SymptomBtn=(Button)view.findViewById(R.id.symptom);
 
 
@@ -50,7 +49,7 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
     private void setListeners() {
         TakeMedAlarmBtn.setOnClickListener(this);
         RestockMedBtn.setOnClickListener(this);
-        DocBtn.setOnClickListener(this);
+
         SymptomBtn.setOnClickListener(this);
 
     }
@@ -77,14 +76,7 @@ public class MedicalAid_Fragment extends Fragment implements View.OnClickListene
                                     Utils.RestockMeds1_Fragment).commit();
                     break;
 
-            case R.id.docvisit:
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer,
-                                new DocVisits1_Fragment(),
-                                Utils.DocVisits1_Fragment).commit();
-                break;
+
 
             case R.id.symptom:
                 fragmentManager
