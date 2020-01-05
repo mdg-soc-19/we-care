@@ -64,8 +64,8 @@ public class PlanningAid_Fragment extends Fragment implements View.OnClickListen
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new Utilities_Fragment(),
-                                Utils.Utilities_Fragment).commit();
+                                new Utilities1_Fragment(),
+                                Utils.Utilities1_Fragment).commit();
                 break;
 
             case R.id.cal:
@@ -73,8 +73,8 @@ public class PlanningAid_Fragment extends Fragment implements View.OnClickListen
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new Calendar_Fragment(),
-                                Utils.Calendar_Fragment).commit();
+                                new Calendar1_Fragment(),
+                                Utils.Calendar1_Fragment).commit();
                 break;
 
 

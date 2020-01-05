@@ -36,7 +36,8 @@ public class RestockMeds1_Fragment extends Fragment {
     private static Button AddBtn, RemoveBtn, BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef11, DemoRef21;
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static String s = null;
+
     private RecyclerView Restockview;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager1;
@@ -60,7 +61,7 @@ public class RestockMeds1_Fragment extends Fragment {
         BackBtn = (Button) view.findViewById(R.id.back);
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef11 = RootRef.child("RMedName");
-        DemoRef21 = RootRef.child("RMedDose");
+       // DemoRef21 = RootRef.child("RMedDose");
         RemoveBtn = (Button) view.findViewById(R.id.remover);
 
 
@@ -120,7 +121,7 @@ public class RestockMeds1_Fragment extends Fragment {
 
         query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("MedName");
+                .child("RMedName");
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
@@ -130,7 +131,7 @@ public class RestockMeds1_Fragment extends Fragment {
                             public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
 
                                 return new Model(
-                                        snapshot.child("MedName").getValue().toString());
+                                    s=    snapshot.getValue().toString());
 
                             }
                         })

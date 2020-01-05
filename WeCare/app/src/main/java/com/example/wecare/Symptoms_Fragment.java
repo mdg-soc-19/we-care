@@ -19,18 +19,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Symptoms_Fragment extends Fragment{
     private static View view;
-
+private static String value,g=null;
     private static Animation shakeAnimation;
     private TextView Symptom;
-    public EditText Name,Description;
-    public Button BackBtn,Save2,Symptom1;
+    public EditText Name;
+    public Button BackBtn,Save2;
     private DatabaseReference RootRef,DemoRef12,DemoRef22;
     private static FragmentManager fragmentManager;
-
+    public Query query;
     public Symptoms_Fragment() {
 
     }
@@ -50,14 +53,13 @@ public class Symptoms_Fragment extends Fragment{
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
         Name=(EditText)view.findViewById(R.id.sname);
-        Description=(EditText)view.findViewById(R.id.sdesc);
+
 
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef12=RootRef.child("SName");
-        DemoRef22=RootRef.child("SDesc");
+
         Save2=(Button)view.findViewById(R.id.save2);
         Symptom=(TextView)view.findViewById(R.id.symptom);
-        Symptom1=(Button) view.findViewById(R.id.symptom1);
 
         BackBtn=(Button)view.findViewById(R.id.back);
 
@@ -74,34 +76,37 @@ public class Symptoms_Fragment extends Fragment{
 
                 String sname = Name.getText().toString();
                 DemoRef12.push().setValue(sname);
-                String sdesc = Description.getText().toString();
-                DemoRef22.push().setValue(sdesc);
+
             }
 
+            {
+                query = FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child("SName");
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                        for (String key : dataMap.keySet()) {
+
+                           // Object data = dataMap.get(key);
+                          g=String.valueOf(dataMap.get(key));
+
+                           // value = dataSnapshot.getValue().toString();
+                            Symptom.setText(g);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
 
         }
     });
 
-        Symptom1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        {
-                            DemoRef12.child("SName").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    String value = dataSnapshot.getValue(String.class);
-                                    Symptom.setText(value);
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                }
-                            });
-                        }
-                    }
-                });
 
 
 

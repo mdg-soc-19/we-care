@@ -49,6 +49,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
     private DatabaseReference RootRef, DemoRef1, DemoRef2;
     private static FragmentManager fragmentManager;
+    public static String s = null;
+
     private RecyclerView AlarmView;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -78,7 +80,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                 R.anim.shake);
 
 
-        RemoveBtn = (Button) view.findViewById(R.id.remove);
+        //RemoveBtn = (Button) view.findViewById(R.id.remove);
         Addbtn = (Button) view.findViewById(R.id.add);
         BackBtn = (Button) view.findViewById(R.id.back);
 
@@ -114,7 +116,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private void setListeners() {
 
         Addbtn.setOnClickListener(this);
-        RemoveBtn.setOnClickListener(this);
+      //  RemoveBtn.setOnClickListener(this);
 
         BackBtn.setOnClickListener(this);
     }
@@ -138,7 +140,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         private void fetch () {
             RootRef = FirebaseDatabase.getInstance().getReference();
             DemoRef1 = RootRef.child("MedName");
-            DemoRef2 = RootRef.child("MedDose");
+          //  DemoRef2 = RootRef.child("MedDose");
 
             FirebaseRecyclerOptions<Model> options =
                     new FirebaseRecyclerOptions.Builder<Model>()
@@ -148,7 +150,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                 public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
 
                                     return new Model(
-                                            snapshot.child("MedName").getValue().toString());
+                                        s= snapshot.getValue().toString());
 
                                 }
                             })
@@ -166,9 +168,11 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
                 @Override
                 protected void onBindViewHolder(ViewHolder holder, final int position, Model model) {
+                    model.setmTitle(s);
+
                     holder.setTxtTitle(model.getmTitle());
 
-
+/**
                     holder.root.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -181,19 +185,19 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                             Utils.TakeMedsAlarm_Fragment).commit();
 
                         }
-                    });
+                    });*/
                 }
 
             };
             AlarmView.setAdapter(mFireAdapter);
         }
-
+@Override
         public void onStart () {
             super.onStart();
             mFireAdapter.startListening();
         }
 
-
+@Override
         public void onStop () {
             super.onStop();
             mFireAdapter.stopListening();
@@ -215,8 +219,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                     Utils.TakeMedsAlarm_Fragment).commit();
 
 
-                    onStart();
-                    onStop();
+
                     break;
                 case R.id.back:
                     new MainActivity().replaceMedicalAid_Fragment();

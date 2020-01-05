@@ -73,7 +73,7 @@ public class TakeMedsAlarm_Fragment extends Fragment{
         DemoRef1=RootRef.child("MedName");
         DemoRef2=RootRef.child("MedDose");
         Name=(EditText)view.findViewById(R.id.name);
-        Dose=(EditText)view.findViewById(R.id.dose);
+      //  Dose=(EditText)view.findViewById(R.id.dose);
 
         T=(Button) view.findViewById(R.id.t);
         BackBtn=(Button) view.findViewById(R.id.back);

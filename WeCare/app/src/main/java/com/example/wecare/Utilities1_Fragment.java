@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,10 +37,11 @@ public class Utilities1_Fragment extends Fragment {
     private static Button AddBtn, RemoveBtn, BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef13;
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static String s = null;
+
     private RecyclerView Restockview;
-    private FirebaseRecyclerAdapter mFireAdapter;
-    private LinearLayoutManager linearLayoutManager1;
+    public FirebaseRecyclerAdapter mFireAdapter;
+    private LinearLayoutManager linearLayoutManager;
     public Query query;
 
 
@@ -59,11 +61,9 @@ public class Utilities1_Fragment extends Fragment {
         AddBtn = (Button) view.findViewById(R.id.addr);
         BackBtn = (Button) view.findViewById(R.id.back);
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef13 = RootRef.child("RMedName");
+        DemoRef13 = RootRef.child("UBillName");
 
         RemoveBtn = (Button) view.findViewById(R.id.remover);
-
-
 
         AddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +73,8 @@ public class Utilities1_Fragment extends Fragment {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new Utilities1_Fragment(),
-                                Utils.Utilities1_Fragment).commit();
+                                new Utilities_Fragment(),
+                                Utils.Utilities_Fragment).commit();
             }
 
         });
@@ -86,9 +86,11 @@ public class Utilities1_Fragment extends Fragment {
 
             }
         });
-        Restockview.setLayoutManager(new LinearLayoutManager(getContext()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        Restockview.setLayoutManager(linearLayoutManager);
+        //Restockview.setLayoutManager(new LinearLayoutManager(getContext()));
         Restockview.setHasFixedSize(true);
-        Restockview.setAdapter(mFireAdapter);
+        //Restockview.setAdapter(mFireAdapter);
 
         fetch();
         return view;
@@ -120,21 +122,22 @@ public class Utilities1_Fragment extends Fragment {
 
         query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("UName");
+                .child("UBillName");
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(query, new SnapshotParser<Model>() {
-                            @NonNull
+                            @Nullable
                             @Override
-                            public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
-
+                            public Model parseSnapshot( @Nullable DataSnapshot snapshot) {
                                 return new Model(
-                                        snapshot.child("UName").getValue().toString());
+                                     s= snapshot.getValue().toString());
+                                //Model model;   model.setmTitle(s);
+                                }
 
-                            }
                         })
                         .build();
+
 
         mFireAdapter = new FirebaseRecyclerAdapter<Model,ViewHolder>(options) {
             @Override
@@ -147,22 +150,18 @@ public class Utilities1_Fragment extends Fragment {
             @Override
             protected void onBindViewHolder(final ViewHolder holder,
                                             final int position, final Model model) {
+
+                model.setmTitle(s);
                 holder.setTxtTitle(model.getmTitle());
 
-
+/**
                 holder.root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                                .replace(R.id.frameContainer,
-                                        new Utilities1_Fragment(),
-                                        Utils.Utilities1_Fragment).commit();
-
+                        Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
 
 
 
@@ -199,6 +198,7 @@ public class Utilities1_Fragment extends Fragment {
         public void setTxtTitle(String string) {
             txtTitle.setText(string);
         }
+
 
     }
 

@@ -18,8 +18,10 @@
         android:layout_height="60dp"
         android:text="UTILITIES REMINDER"
         android:textSize="20dp"
+        android:textColor="@color/black"
+        android:typeface="serif"
         android:background="#FF7F50"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"/>
 
     <TextView
@@ -32,7 +34,7 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textAlignment="center"
-        android:typeface="sans"
+        android:typeface="serif"
         android:gravity="center_vertical"/>
 
 
@@ -42,8 +44,10 @@
         android:layout_height="60dp"
         android:text="SOCIAL CALENDAR"
         android:textSize="20dp"
+        android:textColor="@color/black"
         android:background="#FF7F50"
-        android:layout_marginTop="20dp"
+        android:typeface="serif"
+        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"/>
 
     <TextView
@@ -56,7 +60,7 @@
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textAlignment="center"
-        android:typeface="sans"
+        android:typeface="serif"
         android:gravity="center_vertical"/>
 
 

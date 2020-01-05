@@ -19,11 +19,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class Calendar_Fragment extends Fragment{
     private static View view;
-
+    public Query query;
+    private static String value,g=null;
     private static Animation shakeAnimation;
     private TextView Symptom;
     public EditText Name,Description;
@@ -41,7 +45,6 @@ public class Calendar_Fragment extends Fragment{
         view = inflater.inflate(R.layout.calendar_layout, container, false);
         initViews();
         setListeners();
-
         return view;
     }
 
@@ -50,13 +53,10 @@ public class Calendar_Fragment extends Fragment{
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
         Name=(EditText)view.findViewById(R.id.sname);
-
-
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef14=RootRef.child("CName");
         Save2=(Button)view.findViewById(R.id.save2);
         Symptom=(TextView)view.findViewById(R.id.symptom);
-        Symptom1=(Button) view.findViewById(R.id.symptom1);
 
         BackBtn=(Button)view.findViewById(R.id.back);
 
@@ -76,21 +76,22 @@ public class Calendar_Fragment extends Fragment{
 
                         }
 
-
-                    }
-                });
-
-        Symptom1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
                         {
-                            DemoRef14.child("CName").addListenerForSingleValueEvent(new ValueEventListener() {
+                            query = FirebaseDatabase.getInstance()
+                                    .getReference()
+                                    .child("CName");
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    String value = dataSnapshot.getValue(String.class);
-                                    Symptom.setText(value);
+                                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                                    for (String key : dataMap.keySet()) {
+
+                                        // Object data = dataMap.get(key);
+                                        g=String.valueOf(dataMap.get(key));
+
+                                        // value = dataSnapshot.getValue().toString();
+                                        Symptom.setText(g);
+                                    }
                                 }
 
                                 @Override
@@ -98,8 +99,12 @@ public class Calendar_Fragment extends Fragment{
                                 }
                             });
                         }
+
+
                     }
                 });
+
+
 
 
 

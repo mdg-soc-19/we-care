@@ -33,7 +33,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             Password, confirmPassword;
     private static TextView login;
     private static Button signUpButton;
-    private static CheckBox terms_conditions;
+
 
     private FirebaseAuth firebaseAuth;
 
@@ -61,7 +61,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
-        terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
+
 
 
     }
@@ -131,9 +131,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                     "Both password doesn't match.");
 
             //  Terms and Conditions checkbox
-        else if (!terms_conditions.isChecked())
-            new CustomToast().Show_Toast(getActivity(), view,
-                    "Please select Terms and Conditions.");
 
             // Else do signup
         else

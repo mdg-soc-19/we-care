@@ -59,7 +59,7 @@ public class Utilities_Fragment extends Fragment {
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
         Name=(EditText)view.findViewById(R.id.name);
-        Dose=(EditText)view.findViewById(R.id.dose);
+       // Dose=(EditText)view.findViewById(R.id.dose);
         Symptom=(TextView)view.findViewById(R.id.symptom);
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef13=RootRef.child("UBillName");

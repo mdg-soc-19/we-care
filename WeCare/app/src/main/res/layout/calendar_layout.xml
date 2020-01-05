@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Event"
         android:layout_marginTop="80dp"
-        android:textColor="#226f6b"
+
         android:textSize="25dp"
         android:textAlignment="center"
         android:typeface="sans"/>
@@ -31,28 +31,17 @@
 
     <Button
         android:id="@+id/save2"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="26dp"
         android:typeface="serif"
-        android:text="SAVE"
+        android:text="See this day's symptom"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white_greyish"
+        android:background="#FFDAB9"
         android:textColor="@color/black"/>
 
-    <Button
-        android:id="@+id/symptom1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Today's Event"
 
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
-        android:background="#FF7F50"
-        android:textColor="@color/black"
-        android:typeface="serif"
-        android:layout_gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/symptom"
