@@ -184,7 +184,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         String getEmailId = emailid.getText().toString();
         String getPassword = password.getText().toString();
-        firebaseAuth.signInWithEmailAndPassword(getEmailId, getPassword).addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(getEmailId, getPassword)
+                .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
