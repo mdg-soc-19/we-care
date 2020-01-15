@@ -35,7 +35,7 @@ import com.example.wecare.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class TakeMedsAlarm_Fragment extends Fragment{
+public class TakeMedsAlarm_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
 
     private static View view;
 
@@ -47,7 +47,7 @@ public class TakeMedsAlarm_Fragment extends Fragment{
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
 
-    private DatabaseReference RootRef,DemoRef1,DemoRef2;
+    private DatabaseReference RootRef,DemoRef;
 
     public TakeMedsAlarm_Fragment(){
     }
@@ -70,8 +70,8 @@ public class TakeMedsAlarm_Fragment extends Fragment{
                 R.anim.shake);
 
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef1=RootRef.child("MedName");
-        DemoRef2=RootRef.child("MedDose");
+        DemoRef=RootRef.child("MedName");
+
         Name=(EditText)view.findViewById(R.id.name);
       //  Dose=(EditText)view.findViewById(R.id.dose);
 
@@ -107,9 +107,9 @@ public class TakeMedsAlarm_Fragment extends Fragment{
             public void onClick(View v) {
 
                 String Medname = Name.getText().toString();
-                DemoRef1.push().setValue(Medname);
-                String Meddose = Dose.getText().toString();
-                DemoRef2.push().setValue(Meddose);
+
+               DemoRef.push().setValue(Medname);
+
             }
         });
 
@@ -124,15 +124,15 @@ public class TakeMedsAlarm_Fragment extends Fragment{
     }
 
 
-
-
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
 
     }
 
 
-
-
-
+    }
 
 
 

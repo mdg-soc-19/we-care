@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,13 +25,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class Symptoms_Fragment extends Fragment{
+public class Symptoms_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
 private static String value,g=null;
     private static Animation shakeAnimation;
     private TextView Symptom;
     public EditText Name;
-    public Button BackBtn,Save2;
+    public Button BackBtn,Save2,Save;
     private DatabaseReference RootRef,DemoRef12,DemoRef22;
     private static FragmentManager fragmentManager;
     public Query query;
@@ -59,6 +60,8 @@ private static String value,g=null;
         DemoRef12=RootRef.child("SName");
 
         Save2=(Button)view.findViewById(R.id.save2);
+        Save=(Button)view.findViewById(R.id.s);
+
         Symptom=(TextView)view.findViewById(R.id.symptom);
 
         BackBtn=(Button)view.findViewById(R.id.back);
@@ -68,44 +71,50 @@ private static String value,g=null;
 
 
     private void setListeners() {
-   Save2.setOnClickListener(
-           new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            {
-
-                String sname = Name.getText().toString();
-                DemoRef12.push().setValue(sname);
-
-            }
-
-            {
-                query = FirebaseDatabase.getInstance()
-                        .getReference()
-                        .child("SName");
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+        Save.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
-                        for (String key : dataMap.keySet()) {
-
-                           // Object data = dataMap.get(key);
-                          g=String.valueOf(dataMap.get(key));
-
-                           // value = dataSnapshot.getValue().toString();
-                            Symptom.setText(g);
+                    public void onClick(View v) {
+                        {
+                            String cname = Name.getText().toString();
+                            DemoRef12.push().setValue(cname);
                         }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-            }
 
-        }
-    });
+        Save2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        {
+                            query = FirebaseDatabase.getInstance()
+                                    .getReference()
+                                    .child("SName");
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                                    for (String key : dataMap.keySet()) {
+
+                                        // Object data = dataMap.get(key);
+                                        g=String.valueOf(dataMap.get(key));
+
+                                        // value = dataSnapshot.getValue().toString();
+                                        Symptom.setText(g);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+                        }
+
+
+                    }
+                });
 
 
 
@@ -127,6 +136,12 @@ private static String value,g=null;
 
 
 
+
+    }
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
 
     }
 

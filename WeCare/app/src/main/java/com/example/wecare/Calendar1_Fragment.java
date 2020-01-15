@@ -40,8 +40,8 @@ public class Calendar1_Fragment extends Fragment{
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new Calendar1_Fragment(),
-                                Utils.Calendar1_Fragment).commit();
+                                new Calendar_Fragment(),
+                                Utils.Calendar_Fragment).commit();
 
             }
         });

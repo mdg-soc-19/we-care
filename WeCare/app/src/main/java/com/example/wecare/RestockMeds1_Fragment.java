@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class RestockMeds1_Fragment extends Fragment {
+public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
     private static LinearLayout restockmeds1_layout;
     private static Animation shakeAnimation;
@@ -131,7 +131,7 @@ public class RestockMeds1_Fragment extends Fragment {
                             public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
 
                                 return new Model(
-                                    s=    snapshot.getValue().toString());
+                                    s= snapshot.getValue().toString());
 
                             }
                         })
@@ -203,7 +203,12 @@ public class RestockMeds1_Fragment extends Fragment {
 
     }
 
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
 
+    }
 
 
 }

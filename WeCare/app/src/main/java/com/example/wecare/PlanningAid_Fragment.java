@@ -8,13 +8,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
 
-public class PlanningAid_Fragment extends Fragment implements View.OnClickListener {
+public class PlanningAid_Fragment extends Fragment implements View.OnClickListener,MainActivity.OnBackPressedListener {
     private static View view;
     private static LinearLayout medicalaid_layout;
     private static Animation shakeAnimation;
@@ -76,16 +77,16 @@ public class PlanningAid_Fragment extends Fragment implements View.OnClickListen
                                 new Calendar1_Fragment(),
                                 Utils.Calendar1_Fragment).commit();
                 break;
-
-
-
-
-
-
         }
 
     }
 
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
+
+    }
 }
 
 

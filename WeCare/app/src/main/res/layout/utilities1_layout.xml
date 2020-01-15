@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF7F50">
+    android:background="@color/background_color">
 
     <Button
         android:id="@+id/back"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Back to Home"
         android:layout_marginTop="20dp"
-        android:background="#FF7F50"
+        android:background="@color/background_color"
         android:textColor="@color/black"
         android:typeface="serif"
         android:layout_gravity="center_horizontal"/>
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF7F50"
+        android:background="@color/background_color"
         android:text="Hi, Welcome to Utilities Reminder feature!"
         android:textColor="@color/black"
         android:gravity="center_horizontal"
@@ -43,18 +43,9 @@
             android:text="ADD"
             android:textColor="@color/black"
             android:typeface="serif"
-            android:background="#FFE4B5"    />
+            android:background="@color/lav"  />
 
-        <Button
-            android:id="@+id/remover"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:text="REMOVE"
-            android:typeface="serif"
-            android:textColor="@color/black"
-            android:background="#FFE4B5" />
+
 
 
     </LinearLayout>

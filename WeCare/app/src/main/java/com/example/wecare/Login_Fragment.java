@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -185,9 +186,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         String getEmailId = emailid.getText().toString();
         String getPassword = password.getText().toString();
         firebaseAuth.signInWithEmailAndPassword(getEmailId, getPassword)
-                .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+
                 if(task.isSuccessful())
                 {
                     fragmentManager
@@ -196,9 +199,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             .replace(R.id.frameContainer,
                                     new Home_Fragment(),
                                     Utils.Home_Fragment).commit();
+
                 }
                 else {
-                    Toast.makeText(getActivity(), "Login Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
                 }
 
             }

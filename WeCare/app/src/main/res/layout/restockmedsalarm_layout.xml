@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#38b7af">
+    android:background="@color/background_color">
 
 
     <Button
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Back to Home"
         android:layout_marginTop="20dp"
-        android:background="#38b7af"
+        android:background="@color/background_color"
         android:textColor="@color/black"
         android:typeface="serif"
         android:layout_gravity="center_horizontal"/>
@@ -26,15 +26,7 @@
         android:hint="Input Medicine name"
         android:textSize="25dp" />
 
-   <!-- <EditText
-        android:id="@+id/dose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Input Medicine dosage"
-        android:textSize="25dp" />
--->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,13 +38,11 @@
 
     <DatePicker
         android:id="@+id/D"
-        android:text="Enter Date"
-        android:textSize="20dp"
-        android:typeface="serif"
+        android:datePickerMode="spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#38b7af"
+        android:layout_gravity="center_vertical"
+        android:background="@color/background_color"
         android:layout_marginTop="20dp">
 
     </DatePicker>
@@ -65,7 +55,7 @@
 
         android:text="Save"
         android:layout_marginTop="20dp"
-        android:background="@color/white_greyish"
+        android:background="@color/lav"
         android:textColor="@color/black"
         android:typeface="serif"
         android:layout_gravity="center_horizontal"/>

@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -109,8 +111,14 @@ public class ForgotPassword_Fragment extends Fragment implements
                     .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            Log.i("ForgotFrag","line 114");
                             if (task.isSuccessful()) {
+                                Log.i("ForgotFrag","line 116");
+
                                 Toast.makeText(getActivity(), "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                Log.i("FOrgotFrag","line 119");
+
+
                             } else {
                                 Toast.makeText(getActivity(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
                             }

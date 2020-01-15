@@ -30,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class Utilities1_Fragment extends Fragment {
+public class Utilities1_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
     private static LinearLayout restockmeds1_layout;
     private static Animation shakeAnimation;
@@ -202,7 +202,12 @@ public class Utilities1_Fragment extends Fragment {
 
     }
 
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return true;
 
+    }
 
 
 }

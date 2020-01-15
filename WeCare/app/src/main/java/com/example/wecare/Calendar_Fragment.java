@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,14 +25,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class Calendar_Fragment extends Fragment{
+public class Calendar_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
     public Query query;
     private static String value,g=null;
     private static Animation shakeAnimation;
     private TextView Symptom;
     public EditText Name,Description;
-    public Button BackBtn,Save2,Symptom1;
+    public Button BackBtn,Save2,Save;
     private DatabaseReference RootRef,DemoRef14;
     private static FragmentManager fragmentManager;
 
@@ -56,6 +57,8 @@ public class Calendar_Fragment extends Fragment{
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef14=RootRef.child("CName");
         Save2=(Button)view.findViewById(R.id.save2);
+        Save=(Button)view.findViewById(R.id.s);
+
         Symptom=(TextView)view.findViewById(R.id.symptom);
 
         BackBtn=(Button)view.findViewById(R.id.back);
@@ -65,16 +68,22 @@ public class Calendar_Fragment extends Fragment{
 
 
     private void setListeners() {
-        Save2.setOnClickListener(
+        Save.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         {
-
                             String cname = Name.getText().toString();
                             DemoRef14.push().setValue(cname);
-
                         }
+                    }
+                });
+
+        Save2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
 
                         {
                             query = FirebaseDatabase.getInstance()
@@ -110,6 +119,8 @@ public class Calendar_Fragment extends Fragment{
 
 
 
+
+
         BackBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -120,11 +131,12 @@ public class Calendar_Fragment extends Fragment{
 
                     }
                 });
+    }
 
-
-
-
-
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
 
     }
 

@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-public class Utilities_Fragment extends Fragment {
+public class Utilities_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
 
     private static Animation shakeAnimation;
@@ -80,8 +81,7 @@ public class Utilities_Fragment extends Fragment {
                         Calendar now = Calendar.getInstance();
                         Calendar current = Calendar.getInstance();
 
-                        now.set(now.get(d.getYear()), now.get(d.getMonth()), now.get(d.getDayOfMonth()));
-                        if (now.compareTo(current) <= 0) {
+                        now.set(d.getYear(),d.getMonth(), d.getDayOfMonth());                        if (now.compareTo(current) <= 0) {
                             Toast.makeText(getActivity(), "invalid time", Toast.LENGTH_LONG).show();
                         } else {
                             Intent notifyIntent = new Intent(context, MyReceiver.class);
@@ -117,7 +117,14 @@ public class Utilities_Fragment extends Fragment {
 
 
     }
+    @Override
+    public boolean onBackPressed() {
+        new MainActivity().replaceMedicalAid_Fragment();
+        Log.i("RestockMedsFrag","line 86");
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return true;
 
+    }
 
 
 }

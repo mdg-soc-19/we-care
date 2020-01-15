@@ -39,7 +39,7 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickListener {
+public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickListener,MainActivity.OnBackPressedListener  {
 
 
     private static View view;
@@ -47,7 +47,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private Button Addbtn, RemoveBtn, BackBtn;
 
 
-    private DatabaseReference RootRef, DemoRef1, DemoRef2;
+    private DatabaseReference RootRef, DemoRef1;
     private static FragmentManager fragmentManager;
     public static String s = null;
 
@@ -123,11 +123,10 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public LinearLayout root;
+
             public TextView txtTitle;
             public ViewHolder(View itemView) {
                 super(itemView);
-                root = itemView.findViewById(R.id.list_root);
                 txtTitle = itemView.findViewById(R.id.alarm_title);
             }
 
@@ -140,7 +139,6 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         private void fetch () {
             RootRef = FirebaseDatabase.getInstance().getReference();
             DemoRef1 = RootRef.child("MedName");
-          //  DemoRef2 = RootRef.child("MedDose");
 
             FirebaseRecyclerOptions<Model> options =
                     new FirebaseRecyclerOptions.Builder<Model>()
@@ -149,8 +147,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                 @Override
                                 public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
 
-                                    return new Model(
-                                        s= snapshot.getValue().toString());
+                                       return new Model(
+                                       s= snapshot.getValue().toString());
 
                                 }
                             })
@@ -172,20 +170,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
                     holder.setTxtTitle(model.getmTitle());
 
-/**
-                    holder.root.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
 
-                            fragmentManager
-                                    .beginTransaction()
-                                    .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                                    .replace(R.id.frameContainer,
-                                            new TakeMedsAlarm_Fragment(),
-                                            Utils.TakeMedsAlarm_Fragment).commit();
-
-                        }
-                    });*/
                 }
 
             };
@@ -227,6 +212,12 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
             }
         }
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
+
+    }
 
     }
 
