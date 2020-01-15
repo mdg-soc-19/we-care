@@ -34,7 +34,7 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
     private static View view;
     private static LinearLayout restockmeds1_layout;
     private static Animation shakeAnimation;
-    private static Button AddBtn, RemoveBtn, BackBtn;
+    private static Button AddBtn,BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef13;
     public static String s = null;
@@ -63,7 +63,7 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef13 = RootRef.child("UBillName");
 
-        RemoveBtn = (Button) view.findViewById(R.id.remover);
+
 
         AddBtn.setOnClickListener(new View.OnClickListener() {
             @Override

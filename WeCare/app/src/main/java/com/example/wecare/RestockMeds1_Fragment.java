@@ -33,7 +33,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
     private static View view;
     private static LinearLayout restockmeds1_layout;
     private static Animation shakeAnimation;
-    private static Button AddBtn, RemoveBtn, BackBtn;
+    private static Button AddBtn, BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef11, DemoRef21;
     public static String s = null;
@@ -62,7 +62,6 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef11 = RootRef.child("RMedName");
        // DemoRef21 = RootRef.child("RMedDose");
-        RemoveBtn = (Button) view.findViewById(R.id.remover);
 
 
 
@@ -79,7 +78,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
             }
 
         });
-       // RemoveBtn.setOnClickListener(this);
+
         BackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,7 +17,7 @@
     android:textSize="40dp"
     android:typeface="serif"
     android:textColor="#e9d8da"
-    android:layout_marginTop="40dp"
+    android:layout_marginTop="80dp"
 
 
     />
@@ -29,7 +29,8 @@
         android:layout_marginTop="100dp"
         android:text="Medical Aid"
         android:background="#ebd8ee"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/planaid"
@@ -40,27 +41,9 @@
         android:text="Planning Aid"
         android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/helphand"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:text="Helping Hand"
-        android:background="#ebd8ee"
-        android:textColor="@color/black"/>
+
 
 </LinearLayout>
 
-<Button
-android:id="@+id/button4"
-android:layout_width="wrap_content"
-android:layout_height="60dp"
-android:layout_marginTop="600dp"
-    android:layout_marginLeft="300dp"
-android:text="LogOut"
-android:background="#9874a7"
-    android:textSize="20dp"
-    android:typeface="serif"
-android:textColor="#e9d8da"/>
 
 </RelativeLayout>

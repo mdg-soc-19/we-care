@@ -17,11 +17,11 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:text="UTILITIES REMINDER"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textColor="@color/black"
         android:typeface="serif"
         android:background="@color/lav"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:layout_gravity="center"/>
 
@@ -44,7 +44,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:text="SOCIAL CALENDAR"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textColor="@color/black"
         android:background="@color/lav"
         android:typeface="serif"
