@@ -4,8 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,27 +43,46 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login_Fragment extends Fragment implements OnClickListener {
 
     private static View view;
-
+    private static Context context;
     private static EditText emailid, password;
     private static Button loginButton;
+    private SharedPreferences sp;
     private static TextView forgotPassword, signUp;
     private static CheckBox show_hide_password;
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
 
-    FirebaseAuth firebaseAuth;
-    private FirebaseUser mUser;
-
+   // FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
+    private  FirebaseUser user;
     public Login_Fragment() {
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+         user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                    .replace(R.id.frameContainer,
+                            new Home_Fragment(),
+                            Utils.Home_Fragment).commit();
+            // User is signed in
+        }
 
+
+            // No user is signed in
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        firebaseAuth = FirebaseAuth.getInstance();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        mAuth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.login_layout, container, false);
         initViews();
         setListeners();
@@ -68,8 +90,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
     private void initViews() {
+
         fragmentManager = getActivity().getSupportFragmentManager();
 
+
+
+        sp= getActivity().getSharedPreferences("login",Context.MODE_PRIVATE);
+        Log.i("RestockMedsFrag","line 87 ");
         emailid = (EditText) view.findViewById(R.id.login_emailid);
         password = (EditText) view.findViewById(R.id.login_password);
         loginButton = (Button) view.findViewById(R.id.loginBtn);
@@ -78,12 +105,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         show_hide_password = (CheckBox) view
                 .findViewById(R.id.show_hide_password);
         loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
-
-
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
     }
+
+
 
     private void setListeners() {
         loginButton.setOnClickListener(this);
@@ -107,9 +134,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     .getInstance());
                         } else {
                             show_hide_password.setText(R.string.show_pwd);
-
-
-
                             password.setInputType(InputType.TYPE_CLASS_TEXT
                                     | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             password.setTransformationMethod(PasswordTransformationMethod
@@ -125,7 +149,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginBtn:
-
                 checkValidation();
                 break;
 
@@ -185,21 +208,20 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         String getEmailId = emailid.getText().toString();
         String getPassword = password.getText().toString();
-        firebaseAuth.signInWithEmailAndPassword(getEmailId, getPassword)
+        mAuth.signInWithEmailAndPassword(getEmailId, getPassword)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                user= mAuth.getCurrentUser();
+                        fragmentManager
+                                    .beginTransaction()
+                                    .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                                    .replace(R.id.frameContainer,
+                                            new Home_Fragment(),
+                                            Utils.Home_Fragment).commit();
 
-
-                if(task.isSuccessful())
-                {
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                            .replace(R.id.frameContainer,
-                                    new Home_Fragment(),
-                                    Utils.Home_Fragment).commit();
-
+                            Log.i("RestockMedsFrag","line 223");
                 }
                 else {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();

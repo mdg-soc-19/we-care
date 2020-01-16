@@ -1,10 +1,12 @@
 package com.example.wecare;
 
 import android.content.Context;
+import android.icu.text.Transliterator;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -35,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +48,12 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private static View view;
     private static Animation shakeAnimation;
     private Button Addbtn, RemoveBtn, BackBtn;
-
+    private List<String> friends;
 
     private DatabaseReference RootRef, DemoRef1;
     private static FragmentManager fragmentManager;
     public static String s = null;
-
+    int size;
     private RecyclerView AlarmView;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -66,9 +69,9 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.takemedsalarm1_layout, container, false);
         initViews();
+        AlarmView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         AlarmView.setLayoutManager(linearLayoutManager);
-        AlarmView.setHasFixedSize(true);
         fetch();
         setListeners();
         return view;
@@ -78,16 +81,32 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         fragmentManager = getActivity().getSupportFragmentManager();
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
-
-
-        //RemoveBtn = (Button) view.findViewById(R.id.remove);
         Addbtn = (Button) view.findViewById(R.id.add);
         BackBtn = (Button) view.findViewById(R.id.back);
-
         AlarmView = (RecyclerView) view.findViewById(R.id.alarmView);
+        AlarmView.setNestedScrollingEnabled(false);
         query = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("MedName");
+
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get total available quest
+                friends = new ArrayList<>();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String friend = ds.getKey();
+                    friends.add(friend);
+                }
+                size = (int) dataSnapshot.getChildrenCount();
+                Log.i("TakeMedsFrag","line 158 "+size);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public class Model {
@@ -116,8 +135,6 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private void setListeners() {
 
         Addbtn.setOnClickListener(this);
-      //  RemoveBtn.setOnClickListener(this);
-
         BackBtn.setOnClickListener(this);
     }
 
@@ -146,7 +163,6 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                                 @NonNull
                                 @Override
                                 public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
-
                                        return new Model(
                                        s= snapshot.getValue().toString());
 
@@ -159,22 +175,47 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                 public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                     View view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.list_item, parent, false);
+                    Log.i("TakeMedsFrag","line 171 "+size);
+
 
                     return new ViewHolder(view);
                 }
 
+                @Override
+                public long getItemId(int position) {
+                    return position;
+                }
 
                 @Override
-                protected void onBindViewHolder(ViewHolder holder, final int position, Model model) {
+                public int getItemViewType(int position) {
+                    return position;
+                }
+
+                @Override
+                protected void onBindViewHolder(ViewHolder holder,int position, Model model) {
+                    Log.i("TakeMedsFrag","line 196 "+getItemCount());
+                    friends.get(position);
+                        Log.i("TakeMedsFrag", "line 197 " + getItemCount());
+
+                    if (!mFireAdapter.hasObservers()) {
+                        mFireAdapter.setHasStableIds(true);
+                    }
                     model.setmTitle(s);
-
                     holder.setTxtTitle(model.getmTitle());
-
+                    Log.i("TakeMedsFrag","line 195 "+getItemCount());
 
                 }
 
+                @Override
+                public int getItemCount() {
+                    return size;
+                }
+
+
             };
             AlarmView.setAdapter(mFireAdapter);
+            Log.i("TakeMedsFrag","line 191 "+size);
+
         }
 @Override
         public void onStart () {

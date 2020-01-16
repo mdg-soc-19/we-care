@@ -15,8 +15,7 @@ public class Utils {
     public static final String TakeMedsAlarm1_Fragment="TakeMedsAlarm_Fragment";
     public static final String RestockMeds_Fragment="RestockMeds_Fragment";
     public static final String RestockMeds1_Fragment="RestockMeds1_Fragment";
-    public static final String DocVisits_Fragment="DocVisits_Fragment";
-    public static final String DocVisits1_Fragment="DocVisits_Fragment";
+
     public static final String Symptoms_Fragment="Symptoms_Fragment";
     public static final String Symptoms1_Fragment="Symptoms1_Fragment";
     public static final String PlanningAid_Fragment="PlanningAid_Fragment";

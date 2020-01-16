@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignUp_Fragment extends Fragment implements OnClickListener {
 
@@ -36,7 +37,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
 
     private FirebaseAuth firebaseAuth;
-
     public SignUp_Fragment() {
 
     }
@@ -152,7 +152,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                 //checking if success
                 if (task.isSuccessful()) {
                     //display some message here
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
                     Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_LONG).show();
+
                 } else {
                     //display some message here
                     Toast.makeText(getActivity(), "Registration Error", Toast.LENGTH_LONG).show();

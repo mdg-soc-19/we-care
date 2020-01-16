@@ -17,10 +17,7 @@
     android:textSize="40dp"
     android:typeface="serif"
     android:textColor="#e9d8da"
-    android:layout_marginTop="80dp"
-
-
-    />
+    android:layout_marginTop="80dp" />
 
     <Button
         android:id="@+id/medaid"
@@ -41,7 +38,16 @@
         android:text="Planning Aid"
         android:textColor="@color/black" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#ebd8ee"
+        android:text="Logout"
+        android:textColor="@color/black"
 
+        />
 
 </LinearLayout>
 

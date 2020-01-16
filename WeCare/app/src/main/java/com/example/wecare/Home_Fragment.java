@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
+
 import android.view.View.OnClickListener;
 
 import android.view.ViewGroup;
@@ -31,13 +33,15 @@ public class Home_Fragment extends Fragment implements OnClickListener {
     private static View view;
 
     private static Button MedAidBtn;
-    private static Button PlanAidBtn;
+    private static Button PlanAidBtn,LogoutBtn;
     // private static Button HelpHandBtn;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    private FirebaseAuth mAuth;
 
     public Home_Fragment() {
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,17 +53,18 @@ public class Home_Fragment extends Fragment implements OnClickListener {
     }
 
     private void initViews() {
-
         fragmentManager = getActivity().getSupportFragmentManager();
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
         MedAidBtn = (Button) view.findViewById(R.id.medaid);
         PlanAidBtn = (Button) view.findViewById(R.id.planaid);
+        LogoutBtn=(Button)view.findViewById(R.id.logout);
     }
 
     private void setListeners() {
         MedAidBtn.setOnClickListener(this);
         PlanAidBtn.setOnClickListener(this);
+        LogoutBtn.setOnClickListener(this);
     }
 
     @Override
@@ -81,9 +86,21 @@ public class Home_Fragment extends Fragment implements OnClickListener {
                         .replace(R.id.frameContainer,
                                 new PlanningAid_Fragment(),
                                 Utils.PlanningAid_Fragment).commit();
+                break;
+            case R.id.logout: {
+
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getActivity(), "You're signed out!", Toast.LENGTH_SHORT).show();
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                        .replace(R.id.frameContainer,
+                                new Login_Fragment(),
+                                Utils.Login_Fragment).commit();
+
 
                 break;
-
+            }
         }
 
     }
