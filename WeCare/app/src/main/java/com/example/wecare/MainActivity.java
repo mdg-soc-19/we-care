@@ -77,10 +77,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        replaceMedicalAid_Fragment();
+        Fragment Home= fragmentManager.findFragmentByTag(Utils.Home_Fragment);
+        if(Home!=null)
+        {    moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+        }
+        else
+                replaceMedicalAid_Fragment();
         // Find the tag of signup and forgot password fragment
-
     }
+
+
     public interface OnBackPressedListener{
 
         boolean onBackPressed();

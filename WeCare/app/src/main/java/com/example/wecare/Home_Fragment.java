@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import java.security.PublicKey;
 
 
-public class Home_Fragment extends Fragment implements OnClickListener {
+public class Home_Fragment extends Fragment implements OnClickListener,MainActivity.OnBackPressedListener {
 
     private static View view;
 
@@ -97,13 +97,17 @@ public class Home_Fragment extends Fragment implements OnClickListener {
                         .replace(R.id.frameContainer,
                                 new Login_Fragment(),
                                 Utils.Login_Fragment).commit();
-
-
                 break;
             }
         }
 
     }
+    @Override
+    public boolean onBackPressed() {
 
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
+
+    }
 
 }
