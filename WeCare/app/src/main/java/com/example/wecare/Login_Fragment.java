@@ -40,7 +40,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class Login_Fragment extends Fragment implements OnClickListener {
+public class Login_Fragment extends Fragment implements OnClickListener,MainActivity.OnBackPressedListener {
 
     private static View view;
     private static Context context;
@@ -231,6 +231,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         });
 
         }
+
+    @Override
+    public boolean onBackPressed() {
+
+        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        return false;
+
+    }
 
 
 }

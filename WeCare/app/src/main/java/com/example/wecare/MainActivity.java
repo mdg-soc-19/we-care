@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Fragment Home= fragmentManager.findFragmentByTag(Utils.Home_Fragment);
-        if(Home!=null)
+        Fragment Login= fragmentManager.findFragmentByTag(Utils.Login_Fragment);
+
+        if(Home!=null||Login!=null)
         {    moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
