@@ -29,7 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
+import java.util.ArrayList;
+
+public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBackPressedListener {
     private static View view;
     private static LinearLayout restockmeds1_layout;
     private static Animation shakeAnimation;
@@ -37,14 +39,16 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef11, DemoRef21;
     public static String s = null;
-
+    public  ArrayList<String> arrayList;
     private RecyclerView Restockview;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager1;
     public Query query;
+    int n;
 
 
-    public RestockMeds1_Fragment() { }
+    public RestockMeds1_Fragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,13 +65,12 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
         BackBtn = (Button) view.findViewById(R.id.back);
         RootRef = FirebaseDatabase.getInstance().getReference();
         DemoRef11 = RootRef.child("RMedName");
-       // DemoRef21 = RootRef.child("RMedDose");
 
 
 
         AddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
 
                 fragmentManager
                         .beginTransaction()
@@ -91,7 +94,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
         Restockview.setAdapter(mFireAdapter);
 
         fetch();
-    return view;
+        return view;
     }
 
     public class Model {
@@ -122,6 +125,22 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
                 .getReference()
                 .child("RMedName");
 
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList = new ArrayList<String>();
+                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                    String name = (String) messageSnapshot.getKey();
+                    arrayList.add(name);
+                }
+                if(arrayList.size()!=0) {
+                    n = arrayList.size();
+                }
+                Log.i("UserManager", "Name : "+ arrayList.size());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(query, new SnapshotParser<Model>() {
@@ -130,20 +149,18 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
                             public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
 
                                 return new Model(
-                                    s= snapshot.getValue().toString());
+                                        s = snapshot.getValue().toString());
 
                             }
                         })
                         .build();
-
-        mFireAdapter = new FirebaseRecyclerAdapter<Model,ViewHolder>(options) {
+        mFireAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.list_item, parent, false);
                 return new ViewHolder(view);
             }
-
             @Override
             protected void onBindViewHolder(final ViewHolder holder,
                                             final int position, final Model model) {
@@ -163,14 +180,17 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
 
                     }
                 });
+            }
 
+            @Override
 
+            public int getItemCount(){
 
-
+                    return n;
 
             }
         };
-                Restockview.setAdapter(mFireAdapter);
+        Restockview.setAdapter(mFireAdapter);
     }
 
 
@@ -190,7 +210,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
         public LinearLayout root;
         public TextView txtTitle;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView){
             super(itemView);
             root = itemView.findViewById(R.id.list_root);
             txtTitle = itemView.findViewById(R.id.alarm_title);
@@ -204,7 +224,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
 
     @Override
     public boolean onBackPressed() {
-        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
         return false;
 
     }

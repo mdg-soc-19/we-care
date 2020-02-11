@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUp_Fragment extends Fragment implements OnClickListener {
+public class SignUp_Fragment extends Fragment implements OnClickListener,MainActivity.OnBackPressedListener {
 
     private static View view;
     private static EditText fullName, Email, mobileNumber, location,
@@ -164,6 +164,12 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             }
         });
 
+
+    }
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
+        return false;
 
     }
 }

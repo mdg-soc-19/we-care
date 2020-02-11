@@ -234,7 +234,6 @@ public class Login_Fragment extends Fragment implements OnClickListener,MainActi
 
     @Override
     public boolean onBackPressed() {
-
         Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
         return false;
 

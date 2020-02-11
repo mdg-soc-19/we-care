@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity {
-   // private Stack<BackPressListener> backPressListeners = new Stack<BackPressListener>();
     private static FragmentManager fragmentManager;
 
     @Override
@@ -42,16 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.frameContainer, new Login_Fragment()
                             ,Utils.Login_Fragment).commit();
         }
-
-        // On close icon click finish activity
-        findViewById(R.id.close_activity).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        finish();
-
-                    }
-                });
 
 
 
@@ -79,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         Fragment Home= fragmentManager.findFragmentByTag(Utils.Home_Fragment);
         Fragment Login= fragmentManager.findFragmentByTag(Utils.Login_Fragment);
-
-        if(Home!=null||Login!=null)
+        Fragment Sign=fragmentManager.findFragmentByTag(Utils.SignUp_Fragment);
+        Fragment ForgotPass=fragmentManager.findFragmentByTag(Utils.ForgotPassword_Fragment);
+        if(Home!=null||Login!=null||Sign!=null||ForgotPass!=null)
         {    moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);

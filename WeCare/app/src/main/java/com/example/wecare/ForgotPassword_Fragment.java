@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ForgotPassword_Fragment extends Fragment implements
-        OnClickListener {
+        OnClickListener,MainActivity.OnBackPressedListener{
     private static View view;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -138,5 +138,12 @@ public class ForgotPassword_Fragment extends Fragment implements
          }
 
          }*/
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
+        return false;
+
     }
 }

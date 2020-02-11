@@ -42,22 +42,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickListener,MainActivity.OnBackPressedListener  {
+public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickListener, MainActivity.OnBackPressedListener {
 
 
     private static View view;
     private static Animation shakeAnimation;
-    private Button Addbtn, RemoveBtn, BackBtn;
-    private List<String> friends;
-
+    private Button Addbtn, BackBtn;
+    public ArrayList<String> friends;
     private DatabaseReference RootRef, DemoRef1;
     private static FragmentManager fragmentManager;
     public static String s = null;
-    int size;
+
     private RecyclerView AlarmView;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
-
+    int n;
     public Query query;
 
     public TakeMedsAlarm1_Fragment() {
@@ -90,23 +89,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
                 .child("MedName");
 
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // get total available quest
-                friends = new ArrayList<>();
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String friend = ds.getKey();
-                    friends.add(friend);
-                }
-                size = (int) dataSnapshot.getChildrenCount();
-                Log.i("TakeMedsFrag","line 158 "+size);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
     }
 
     public class Model {
@@ -139,128 +122,139 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     }
 
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView txtTitle;
-            public ViewHolder(View itemView) {
-                super(itemView);
-                txtTitle = itemView.findViewById(R.id.alarm_title);
-            }
-
-            public void setTxtTitle(String string) {
-                txtTitle.setText(string);
-            }
-
+        public TextView txtTitle;
+        public LinearLayout root;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            root = itemView.findViewById(R.id.list_root);
+            txtTitle = itemView.findViewById(R.id.alarm_title);
         }
 
-        private void fetch () {
-            RootRef = FirebaseDatabase.getInstance().getReference();
-            DemoRef1 = RootRef.child("MedName");
+        public void setTxtTitle(String string) {
+            txtTitle.setText(string);
+        }
 
-            FirebaseRecyclerOptions<Model> options =
-                    new FirebaseRecyclerOptions.Builder<Model>()
-                            .setQuery(query, new SnapshotParser<Model>() {
-                                @NonNull
-                                @Override
-                                public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                       return new Model(
-                                       s= snapshot.getValue().toString());
+    }
 
-                                }
-                            })
-                            .build();
+    private void fetch() {
+        RootRef = FirebaseDatabase.getInstance().getReference();
+        DemoRef1 = RootRef.child("MedName");
 
-            mFireAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
-                @Override
-                public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    View view = LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.list_item, parent, false);
-                    Log.i("TakeMedsFrag","line 171 "+size);
-
-
-                    return new ViewHolder(view);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // get total available quest
+                friends = new ArrayList<String>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String friend =(String)ds.getKey();
+                    friends.add(friend);
                 }
-
-                @Override
-                public long getItemId(int position) {
-                    return position;
+                if(friends.size()!=0) {
+                    n = friends.size();
                 }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                @Override
-                public int getItemViewType(int position) {
-                    return position;
-                }
+            }
+        });
 
-                @Override
-                protected void onBindViewHolder(ViewHolder holder,int position, Model model) {
-                    Log.i("TakeMedsFrag","line 196 "+getItemCount());
-                    friends.get(position);
-                        Log.i("TakeMedsFrag", "line 197 " + getItemCount());
+        FirebaseRecyclerOptions<Model> options =
+                new FirebaseRecyclerOptions.Builder<Model>()
+                        .setQuery(query, new SnapshotParser<Model>() {
+                            @NonNull
+                            @Override
+                            public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
+                                return new Model(
+                                        s = snapshot.getValue().toString());
+                            }
+                        })
+                        .build();
 
-                    if (!mFireAdapter.hasObservers()) {
-                        mFireAdapter.setHasStableIds(true);
+        mFireAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+            @Override
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_item, parent, false);
+
+                return new ViewHolder(view);
+            }
+            @Override
+            protected void onBindViewHolder(final ViewHolder holder,final int position,final Model model) {
+
+                holder.setTxtTitle(model.getmTitle());
+
+                holder.root.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                                .replace(R.id.frameContainer,
+                                        new RestockMeds_Fragment(),
+                                        Utils.RestockMeds_Fragment).commit();
+
                     }
-                    model.setmTitle(s);
-                    holder.setTxtTitle(model.getmTitle());
-                    Log.i("TakeMedsFrag","line 195 "+getItemCount());
-
-                }
-
-                @Override
-                public int getItemCount() {
-                    return size;
-                }
-
-
-            };
-            AlarmView.setAdapter(mFireAdapter);
-            Log.i("TakeMedsFrag","line 191 "+size);
-
-        }
-@Override
-        public void onStart () {
-            super.onStart();
-            mFireAdapter.startListening();
-        }
-
-@Override
-        public void onStop () {
-            super.onStop();
-            mFireAdapter.stopListening();
-        }
-
-
-
-
-
-        @Override
-        public void onClick (View v){
-            switch (v.getId()) {
-                case R.id.add:
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                            .replace(R.id.frameContainer,
-                                    new TakeMedsAlarm_Fragment(),
-                                    Utils.TakeMedsAlarm_Fragment).commit();
-
-
-
-                    break;
-                case R.id.back:
-                    new MainActivity().replaceMedicalAid_Fragment();
-
+                });
 
             }
+
+            @Override
+            public int getItemCount() {
+                return n;
+            }
+
+
+        };
+        AlarmView.setAdapter(mFireAdapter);
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFireAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFireAdapter.stopListening();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add:
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                        .replace(R.id.frameContainer,
+                                new TakeMedsAlarm_Fragment(),
+                                Utils.TakeMedsAlarm_Fragment).commit();
+
+
+                break;
+            case R.id.back:
+                new MainActivity().replaceMedicalAid_Fragment();
+
+
         }
+    }
+
     @Override
     public boolean onBackPressed() {
-        Toast.makeText(getActivity(),"You'll be directed to HomePage",Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
         return false;
 
     }
 
-    }
+}
 
 
 

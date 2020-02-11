@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Utilities1_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
     private static View view;
     private static LinearLayout restockmeds1_layout;
@@ -38,12 +40,12 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef13;
     public static String s = null;
-
+    public ArrayList<String> friends;
     private RecyclerView Restockview;
     public FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
     public Query query;
-
+    int n;
 
     public Utilities1_Fragment() { }
 
@@ -124,6 +126,25 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
                 .getReference()
                 .child("UBillName");
 
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // get total available quest
+                friends = new ArrayList<String>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String friend =(String)ds.getKey();
+                    friends.add(friend);
+                }
+                if(friends.size()!=0) {
+                    n = friends.size();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(query, new SnapshotParser<Model>() {
@@ -151,17 +172,21 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
             protected void onBindViewHolder(final ViewHolder holder,
                                             final int position, final Model model) {
 
-                model.setmTitle(s);
+
                 holder.setTxtTitle(model.getmTitle());
 
-/**
+
                 holder.root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                                .replace(R.id.frameContainer,
+                                        new Utilities1_Fragment(),
+                                        Utils.Utilities1_Fragment).commit();
                     }
-                });*/
+                });
 
 
 
