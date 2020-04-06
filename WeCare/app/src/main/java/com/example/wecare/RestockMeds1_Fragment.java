@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +40,8 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
     private static Button AddBtn, BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef11, DemoRef21;
+    private FirebaseUser user;
+    String uid;
     public static String s = null;
     public  ArrayList<String> arrayList;
     private RecyclerView Restockview;
@@ -63,9 +67,10 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
                 R.anim.shake);
         AddBtn = (Button) view.findViewById(R.id.addr);
         BackBtn = (Button) view.findViewById(R.id.back);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef11 = RootRef.child("RMedName");
-
+        uid= user.getUid();
+        DemoRef11 = RootRef.child(uid).child("UBillName");
 
 
         AddBtn.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +130,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
                 .getReference()
                 .child("RMedName");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        DemoRef11.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 arrayList = new ArrayList<String>();
@@ -141,6 +146,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(query, new SnapshotParser<Model>() {

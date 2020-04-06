@@ -20,23 +20,26 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
 public class Utilities_Fragment extends Fragment implements MainActivity.OnBackPressedListener{
-    private static View view;
+    private View view;
 
     private static Animation shakeAnimation;
-    private static Button Save1,BackBtn;
-    private static EditText Name,Dose;
+    private Button Save1,BackBtn;
+    private EditText Name;
     private DatePicker d;
     public Context context;
-    private static Button TakeMedAlarmBtn;
-    private static Button RestockMedBtn;
-    private static TextView Symptom;
+
+    private TextView Symptom;
     private DatabaseReference RootRef,DemoRef13;
+    private FirebaseUser user;
+    private String uid;
     private static FragmentManager fragmentManager;
     public int  NOTIFICATION_REMINDER = 3;
 
@@ -62,8 +65,10 @@ public class Utilities_Fragment extends Fragment implements MainActivity.OnBackP
         Name=(EditText)view.findViewById(R.id.name);
        // Dose=(EditText)view.findViewById(R.id.dose);
         Symptom=(TextView)view.findViewById(R.id.symptom);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef13=RootRef.child("UBillName");
+        uid= user.getUid();
+        DemoRef13 = RootRef.child(uid).child("UBillName");
 
 
         d=(DatePicker)view.findViewById(R.id.D);

@@ -28,6 +28,8 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +45,8 @@ public class RestockMeds_Fragment extends Fragment implements MainActivity.OnBac
     private static Button RestockMedBtn;
     private static TextView Symptom;
     private DatabaseReference RootRef,DemoRef11;
+    private FirebaseUser user;
+    private String uid;
     private static FragmentManager fragmentManager;
     public int  NOTIFICATION_REMINDER = 3;
 
@@ -76,8 +80,10 @@ public class RestockMeds_Fragment extends Fragment implements MainActivity.OnBac
                 R.anim.shake);
         Name=(EditText)view.findViewById(R.id.name);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef11=RootRef.child("RMedName");
+        uid= user.getUid();
+        DemoRef11 = RootRef.child(uid).child("UBillName");
 
 
 

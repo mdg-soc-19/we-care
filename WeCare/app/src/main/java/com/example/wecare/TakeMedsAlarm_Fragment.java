@@ -30,8 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wecare.R;
 
 
-
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,7 +48,8 @@ public class TakeMedsAlarm_Fragment extends Fragment implements MainActivity.OnB
     private static FragmentManager fragmentManager;
 
     private DatabaseReference RootRef,DemoRef;
-
+    private FirebaseUser user;
+    private String uid;
     public TakeMedsAlarm_Fragment(){
     }
 
@@ -69,8 +70,11 @@ public class TakeMedsAlarm_Fragment extends Fragment implements MainActivity.OnB
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef=RootRef.child("MedName");
+        uid= user.getUid();
+        DemoRef = RootRef.child(uid).child("UBillName");
 
         Name=(EditText)view.findViewById(R.id.name);
       //  Dose=(EditText)view.findViewById(R.id.dose);

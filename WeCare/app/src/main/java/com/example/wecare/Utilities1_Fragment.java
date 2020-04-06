@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +41,10 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
     private static Button AddBtn,BackBtn;
     private static FragmentManager fragmentManager;
     private DatabaseReference RootRef, DemoRef13;
+    private FirebaseUser user;
+    String uid;
     public static String s = null;
+
     public ArrayList<String> friends;
     private RecyclerView Restockview;
     public FirebaseRecyclerAdapter mFireAdapter;
@@ -62,8 +67,10 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
                 R.anim.shake);
         AddBtn = (Button) view.findViewById(R.id.addr);
         BackBtn = (Button) view.findViewById(R.id.back);
+         user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef13 = RootRef.child("UBillName");
+        uid= user.getUid();
+        DemoRef13 = RootRef.child(uid).child("UBillName");
 
 
 
@@ -126,7 +133,7 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
                 .getReference()
                 .child("UBillName");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        DemoRef13.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // get total available quest

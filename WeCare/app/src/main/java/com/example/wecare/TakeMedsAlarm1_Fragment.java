@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +54,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     private DatabaseReference RootRef, DemoRef1;
     private static FragmentManager fragmentManager;
     public static String s = null;
-
+    private FirebaseUser user;
+    String uid;
     private RecyclerView AlarmView;
     private FirebaseRecyclerAdapter mFireAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -84,9 +87,10 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         BackBtn = (Button) view.findViewById(R.id.back);
         AlarmView = (RecyclerView) view.findViewById(R.id.alarmView);
         AlarmView.setNestedScrollingEnabled(false);
-        query = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("MedName");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        RootRef = FirebaseDatabase.getInstance().getReference();
+        uid= user.getUid();
+        DemoRef1 = RootRef.child(uid).child("UBillName");
 
 
 
@@ -139,10 +143,8 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
     }
 
     private void fetch() {
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        DemoRef1 = RootRef.child("MedName");
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        DemoRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // get total available quest
