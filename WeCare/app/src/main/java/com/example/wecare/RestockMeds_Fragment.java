@@ -83,7 +83,7 @@ public class RestockMeds_Fragment extends Fragment implements MainActivity.OnBac
         user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
         uid= user.getUid();
-        DemoRef11 = RootRef.child(uid).child("UBillName");
+        DemoRef11 = RootRef.child(uid).child("RMedName");
 
 
 

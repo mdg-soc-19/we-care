@@ -154,7 +154,7 @@ public class Utilities1_Fragment extends Fragment implements MainActivity.OnBack
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
-                        .setQuery(query, new SnapshotParser<Model>() {
+                        .setQuery(DemoRef13, new SnapshotParser<Model>() {
                             @Nullable
                             @Override
                             public Model parseSnapshot( @Nullable DataSnapshot snapshot) {

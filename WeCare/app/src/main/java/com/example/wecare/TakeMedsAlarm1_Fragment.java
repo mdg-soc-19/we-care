@@ -90,7 +90,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
         user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
         uid= user.getUid();
-        DemoRef1 = RootRef.child(uid).child("UBillName");
+        DemoRef1 = RootRef.child(uid).child("Medname");
 
 
 
@@ -165,7 +165,7 @@ public class TakeMedsAlarm1_Fragment extends Fragment implements View.OnClickLis
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
-                        .setQuery(query, new SnapshotParser<Model>() {
+                        .setQuery(DemoRef1, new SnapshotParser<Model>() {
                             @NonNull
                             @Override
                             public Model parseSnapshot(@NonNull DataSnapshot snapshot) {

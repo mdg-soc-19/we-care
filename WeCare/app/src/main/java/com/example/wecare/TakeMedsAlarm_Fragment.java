@@ -74,7 +74,7 @@ public class TakeMedsAlarm_Fragment extends Fragment implements MainActivity.OnB
         user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
         uid= user.getUid();
-        DemoRef = RootRef.child(uid).child("UBillName");
+        DemoRef = RootRef.child(uid).child("Medname");
 
         Name=(EditText)view.findViewById(R.id.name);
       //  Dose=(EditText)view.findViewById(R.id.dose);

@@ -70,7 +70,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
         user = FirebaseAuth.getInstance().getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
         uid= user.getUid();
-        DemoRef11 = RootRef.child(uid).child("UBillName");
+        DemoRef11 = RootRef.child(uid).child("RMedName");
 
 
         AddBtn.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +126,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
 
     private void fetch() {
 
-        query = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("RMedName");
+
 
         DemoRef11.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -149,7 +147,7 @@ public class RestockMeds1_Fragment extends Fragment implements MainActivity.OnBa
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
-                        .setQuery(query, new SnapshotParser<Model>() {
+                        .setQuery(DemoRef11, new SnapshotParser<Model>() {
                             @NonNull
                             @Override
                             public Model parseSnapshot(@NonNull DataSnapshot snapshot) {
