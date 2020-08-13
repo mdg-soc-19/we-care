@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" MEDICAL AID "
+        android:background="@color/background_color"
+        android:typeface="serif"
+        android:textSize="30dp"/>
+
+
+
+    <Button
+        android:id="@+id/takemed"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="Take Medicine Alarm"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:background="@color/lav"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_color"
+        android:text="Get Daily reminders to take your prescribed meds in time!"
+        android:textColor="@color/lav"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:typeface="serif"
+        />
+
+
+    <Button
+        android:id="@+id/restockmed"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="ReStock Meds Alarm"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:background="@color/lav"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_color"
+        android:text="Be alerted to buy medicines before they get over:Set a day for when you want to be reminded to ReStock each medicine."
+        android:textColor="@color/lav"        android:textSize="20dp"
+        android:textAlignment="center"
+        android:typeface="sans"/>
+
+    <Button
+        android:id="@+id/symptom"
+        android:layout_width="300dp"         android:layout_marginTop="20dp"
+
+        android:layout_height="60dp"
+        android:text="Symptom Diary"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:background="@color/lav"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_color"
+        android:text="Record symptoms,or updates on illnesses here. For eg,frequency and intensity of migraines"
+        android:textColor="@color/lav"        android:textSize="20dp"
+        android:textAlignment="center"
+        android:typeface="serif"/>
+
+
+
+
+</LinearLayout>

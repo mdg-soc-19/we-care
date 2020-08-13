@@ -15,50 +15,41 @@
     android:layout_height="wrap_content"
     android:text="MENU"
     android:textSize="40dp"
+    android:typeface="serif"
     android:textColor="#e9d8da"
-    android:layout_marginTop="40dp"
-
-
-    />
+    android:layout_marginTop="80dp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/medaid"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
         android:text="Medical Aid"
         android:background="#ebd8ee"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/planaid"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:background="#ebd8ee"
-        android:text="Plannning Aid"
+        android:text="Planning Aid"
         android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:text="Helping Hand"
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:background="#ebd8ee"
-        android:textColor="@color/black"/>
+        android:text="Logout"
+        android:textColor="@color/black"
+
+        />
 
 </LinearLayout>
 
-<Button
-android:id="@+id/button4"
-android:layout_width="wrap_content"
-android:layout_height="60dp"
-android:layout_marginTop="600dp"
-    android:layout_marginLeft="300dp"
-android:text="LogOut"
-android:background="#9874a7"
-    android:textSize="20dp"
-android:textColor="#e9d8da"/>
 
 </RelativeLayout>

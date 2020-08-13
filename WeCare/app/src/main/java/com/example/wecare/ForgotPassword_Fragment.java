@@ -3,8 +3,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import android.app.Activity;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,11 +19,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ForgotPassword_Fragment extends Fragment implements
-        OnClickListener {
-    private static View view;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+public class ForgotPassword_Fragment extends Fragment implements
+        OnClickListener,MainActivity.OnBackPressedListener{
+    private static View view;
+    private FirebaseAuth.AuthStateListener authListener;
+    private FirebaseAuth auth;
+    private FirebaseUser mUser;
     private static EditText emailId;
+    private static String getEmailId;
     private static TextView submit, back;
 
     public ForgotPassword_Fragment() {
@@ -28,6 +41,8 @@ public class ForgotPassword_Fragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        auth = FirebaseAuth.getInstance();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         view = inflater.inflate(R.layout.forgotpassword_layout, container,
                 false);
         initViews();
@@ -68,9 +83,8 @@ public class ForgotPassword_Fragment extends Fragment implements
         }
 
     }
-
     private void submitButtonTask() {
-        String getEmailId = emailId.getText().toString();
+        getEmailId = emailId.getText().toString();
 
         // Pattern for email id validation
         Pattern p = Pattern.compile(Utils.regEx);
@@ -91,7 +105,45 @@ public class ForgotPassword_Fragment extends Fragment implements
 
             // Else submit email id and fetch passwod or do your stuff
         else
-            Toast.makeText(getActivity(), "Get Forgot Password.",
-                    Toast.LENGTH_SHORT).show();
+        //if(getEmailId!=null) {
+        {
+            auth.sendPasswordResetEmail(getEmailId)
+                    .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.i("ForgotFrag","line 114");
+                            if (task.isSuccessful()) {
+                                Log.i("ForgotFrag","line 116");
+
+                                Toast.makeText(getActivity(), "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                Log.i("FOrgotFrag","line 119");
+
+
+                            } else {
+                                Toast.makeText(getActivity(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
+
+        }
+
+
+        /**private void ForgotPassword(){
+         //  getEmailId = emailId.getText().toString();
+         if(getEmailId!=null) {
+         auth.sendPasswordResetEmail(getEmailId);
+
+         }
+
+         }*/
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
+        return false;
+
     }
 }

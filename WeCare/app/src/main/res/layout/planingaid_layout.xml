@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/background_color"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" PLANNING AID "
+        android:typeface="serif"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/util"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="UTILITIES REMINDER"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:background="@color/lav"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_color"
+        android:text="Keep track of Bill payments, get reminded about them"
+        android:textColor="@color/lav"
+        android:textSize="23dp"
+        android:textAlignment="center"
+        android:typeface="serif"
+        android:gravity="center_vertical"/>
+
+
+    <Button
+        android:id="@+id/cal"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="SOCIAL CALENDAR"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:background="@color/lav"
+        android:typeface="serif"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_color"
+        android:text="Record events"
+        android:textColor="@color/lav"
+        android:textSize="23dp"
+        android:textAlignment="center"
+        android:typeface="serif"
+        android:gravity="center_vertical"/>
+
+
+
+
+</LinearLayout>

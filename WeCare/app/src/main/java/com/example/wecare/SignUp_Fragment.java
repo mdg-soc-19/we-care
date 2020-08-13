@@ -25,18 +25,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
-public class SignUp_Fragment extends Fragment implements OnClickListener {
+public class SignUp_Fragment extends Fragment implements OnClickListener,MainActivity.OnBackPressedListener {
 
     private static View view;
     private static EditText fullName, Email, mobileNumber, location,
             Password, confirmPassword;
     private static TextView login;
     private static Button signUpButton;
-    private static CheckBox terms_conditions;
+
 
     private FirebaseAuth firebaseAuth;
-
     public SignUp_Fragment() {
 
     }
@@ -61,7 +61,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
-        terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
+
 
 
     }
@@ -131,9 +131,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                     "Both password doesn't match.");
 
             //  Terms and Conditions checkbox
-        else if (!terms_conditions.isChecked())
-            new CustomToast().Show_Toast(getActivity(), view,
-                    "Please select Terms and Conditions.");
 
             // Else do signup
         else
@@ -155,7 +152,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                 //checking if success
                 if (task.isSuccessful()) {
                     //display some message here
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
                     Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_LONG).show();
+
                 } else {
                     //display some message here
                     Toast.makeText(getActivity(), "Registration Error", Toast.LENGTH_LONG).show();
@@ -164,6 +164,12 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             }
         });
 
+
+    }
+    @Override
+    public boolean onBackPressed() {
+        Toast.makeText(getActivity(), "You'll be directed to HomePage", Toast.LENGTH_LONG).show();
+        return false;
 
     }
 }

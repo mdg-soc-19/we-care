@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:layout_marginTop="20dp"
+        android:background="@color/background_color"
+        android:textColor="@color/black"
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/sname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Event"
+        android:layout_marginTop="80dp"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:typeface="sans"/>
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:typeface="serif"
+        android:text=" Submit"
+        android:layout_gravity="center_horizontal"
+       android:background="@color/lav"
+        android:textColor="@color/black"/>
+
+
+    <Button
+        android:id="@+id/save2"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:typeface="serif"
+        android:text=" See this day's previously entered symptom"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/lav"
+        android:textColor="@color/black"/>
+
+
+
+    <TextView
+        android:id="@+id/symptom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white_greyish"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        />
+
+
+</LinearLayout>
